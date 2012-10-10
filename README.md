@@ -18,11 +18,11 @@ Requirements
 Installation
 ============
 
-Install the required gem:
+Install the required gems:
 
 ```bash
 $ gem install bundler
-$ bundle install
+$ gem install vagrant
 ```
 
 Clone the repository and install chef's necessary packages:
@@ -30,6 +30,7 @@ Clone the repository and install chef's necessary packages:
 ```bash
 $ git clone https://github.com/gitlabhq/gitlab-vagrant-vm
 $ cd gitlab-vagrant-vm
+$ bundle install
 $ librarian-chef install
 ```
 
@@ -98,3 +99,48 @@ Finally, to completely wipe the virtual machine from the disk **destroying all i
 ```bash
 $ vagrant destroy # DANGER: all is gone
 ```
+
+Troubleshooting
+==========================
+
+If after running `vagrant up` you get the following error:
+
+```
+The host class is reporting that NFS is not supported by this host,
+or `nfsd` may not be installed. Please verify that `nfsd` is installed
+on your machine, and retry.
+```
+
+You don't have nfs installed on your host machine, for Ubuntu run:
+
+```bash
+$ sudo apt-get install nfs-common
+```
+
+=========
+
+If after running `vagrant up` you get the following error:
+
+```
+[vagrant] Preparing to edit /etc/exports. Administrator privileges will be required...
+sudo: /etc/init.d/nfs-kernel-server: command not found
+
+****(ommited other output)
+
+Mounting NFS shared folders failed. This is most often caused by the NFS
+client software not being installed on the guest machine. Please verify
+that the NFS client software is properly installed, and consult any resources
+specific to the linux distro you're using for more information on how to
+do this.
+```
+
+Some users report that this issue can be fixed by following directions from [Stackoverflow](http://stackoverflow.com/a/9719588/1567796).
+
+If that doesn't help, you can skip this step by changing Vagrantfile config:
+
+    config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
+
+to
+
+    config.vm.share_folder("v-root", "/vagrant", ".", :nfs => false)
+
