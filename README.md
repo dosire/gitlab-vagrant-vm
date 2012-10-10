@@ -12,7 +12,7 @@ Requirements
 * [VirtualBox](https://www.virtualbox.org)
 * [Vagrant](http://vagrantup.com)
 * A few gems: bundler, chef, librarian
-* Have the NFS packages installed (already there if you are using Mac OS)
+* Have the NFS packages installed (already there if you are using Mac OS, for Debian/Ubuntu: sudo apt-get install nfs-common)
 * And some patience :)
 
 Installation
@@ -103,21 +103,8 @@ $ vagrant destroy # DANGER: all is gone
 Troubleshooting
 ==========================
 
-If after running `vagrant up` you get the following error:
-
-```
-The host class is reporting that NFS is not supported by this host,
-or `nfsd` may not be installed. Please verify that `nfsd` is installed
-on your machine, and retry.
-```
-
-You don't have nfs installed on your host machine, for Ubuntu run:
-
-```bash
-$ sudo apt-get install nfs-common
-```
-
-=========
+Mounting NFS shared folders failed
+----------------------------------
 
 If after running `vagrant up` you get the following error:
 
