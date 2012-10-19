@@ -18,6 +18,11 @@ Requirements
 Installation
 ============
 
+Install the Postgres package:
+```bash
+$ sudo apt-get install -y libpq-dev
+```
+
 Install the required gem:
 
 ```bash
