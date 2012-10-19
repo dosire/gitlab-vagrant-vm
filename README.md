@@ -22,7 +22,7 @@ Install the required gem:
 
 ```bash
 $ gem install bundler
-$ bundle install
+$ bundle install --without postgres
 ```
 
 Clone the repository and install chef's necessary packages:
